@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+  <head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>PayPal JS SDK Standard Integration</title> 
+  </head> 
+  <body> 
+     
+    <p id="result-message"></p> 
+    <!-- Replace the "test" client-id value with your client-id --> 
+    <script src="https://www.paypal.com/sdk/js?client-id=AXwN5wFhb1ft-fYOOyNfZvbO7uBFpKLc-hMgRen88oBJPj3IBHLqT8lfYk6Sk4yxeUqPlekVqqJUHrpC&currency=USD"></script> 
+     
+ 
+<div id="paypal-button-container" style="max-width:1000px;"></div> 
+ 
+<script> 
+ 
+paypal.Buttons({ 
+ 
+// Set up the transaction 
+createOrder: function (data, actions) { 
+    return actions.order.create({ 
+        purchase_units: [{ 
+            amount: { 
+                value: '0.01' 
+            } 
+        }] 
+    }); 
+}, 
+onApprove: function (data, actions) { 
+              return actions.order.capture().then(function (details) { 
+                  // Show a success message to the buyer 
+                  // click function 
+                //   autoBuyCart.click() 
+                  alert('Transaction completed by ' + details.payer.name 
+                      .given_name + '!'); 
+              }); 
+          } 
+ 
+ 
+      }).render('#paypal-button-container'); 
+ 
+//   paypal.Buttons({ 
+//   style: { 
+//     disableMaxWidth: true 
+//   }, 
+// }).render('#paypal-button-container'); 
+</script> 
+     
+    </script> 
+  </body> 
+</html>
